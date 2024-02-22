@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -92,6 +93,47 @@ namespace DrawingApplication
 
                 DrawLine(startPoint, endPoint);
                 lastPoint = currentPoint;
+            }
+        }
+        private void SaveAsClick(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PNG Image (*.png)|*.png|BMP Image (*.bmp)|*.bmp|JPEG Image (*.jpg)|*.jpg";
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string fileName = saveFileDialog.FileName;
+                string extension = Path.GetExtension(fileName).ToLower();
+
+                try
+                {
+                    BitmapEncoder encoder = null;
+                    switch (extension)
+                    {
+                        case ".png":
+                            encoder = new PngBitmapEncoder();
+                            break;
+                        case ".bmp":
+                            encoder = new BmpBitmapEncoder();
+                            break;
+                        case ".jpg":
+                            encoder = new JpegBitmapEncoder();
+                            break;
+                        default:
+                            MessageBox.Show("Unsupported file format");
+                            return;
+                    }
+
+                    encoder.Frames.Add(BitmapFrame.Create((BitmapSource)myImage.Source));
+
+                    using (FileStream fileStream = new FileStream(fileName, FileMode.Create))
+                    {
+                        encoder.Save(fileStream);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error saving image: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
         private void DrawLine(Point startPoint, Point endPoint)
