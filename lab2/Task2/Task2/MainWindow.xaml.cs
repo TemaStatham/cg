@@ -80,6 +80,7 @@ namespace DrawingApplication
             lastPoint = null;
             isDraw = false;
         }
+        // откуда взяалась эта формула
         private void MainImageMouseMove(object sender, MouseEventArgs e)
         {
             if (isDraw && e.LeftButton == MouseButtonState.Pressed && lastPoint != null)

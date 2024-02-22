@@ -38,7 +38,34 @@ namespace Task3
             InitCanvas();
             canvas.MouseLeftButtonDown += (sender, e) => circleDrawer.CanvasMouseLeftButtonDown(canvas, sender, e);
         }
+        /*private double ParseR(double R)
+        {
+            double max = Math.Max(Constants.CanvasHeight, Constants.CanvasWidth);
 
+            if (R > max)
+            {
+                return 0;
+            }
+
+            return R;
+        }
+
+        private double ButtonClick()
+        {
+            string input = Microsoft.VisualBasic.Interaction.InputBox("Введите число:", "Ввод числа", "");
+
+            double result;
+            try
+            {
+                result = Convert.ToDouble(input);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Некорректный формат ввода. Введите число.");
+                result = 0;
+            }
+            return result;
+        }*/
 
         private void InitCanvas()
         {

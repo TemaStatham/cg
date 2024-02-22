@@ -14,16 +14,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Task3
 {
+
     internal class CircleDrawer
     {
         public void CanvasMouseLeftButtonDown(Canvas canvas, object sender, MouseButtonEventArgs e)
         {
             Point pointClicked = e.GetPosition(canvas);
 
-            double Xc = pointClicked.X, Yc = pointClicked.Y, R = ParseR(ButtonClick()), Pix = Constants.Pix;
+            double Xc = pointClicked.X, Yc = pointClicked.Y, Pix = Constants.Pix;
+            double R = ParseR(ButtonClick());
             DrawCircle(canvas, Xc, Yc, R, Pix);
         }
-
+        // класс рисующий окружность не должен выводить окон
         private double ParseR(double R)
         {
             double max = Math.Max(Constants.CanvasHeight, Constants.CanvasWidth);
@@ -55,9 +57,12 @@ namespace Task3
 
         private void DrawCircle(Canvas canvas, double Xc, double Yc, double R, double Pix)
         {
-            DrawBRcircle(canvas, Xc, Yc, R, Pix);
+            //DrawBRcircle(canvas, Xc, Yc, R, Pix);
+            VMIcirc(canvas, Xc, Yc, R, Pix);
         }
-
+        // рисует неправильно для маленьких значений
+        // реализовать миченра и брезенхема, проверить какой болле правильный
+        // goto удалтиь
         private void DrawBRcircle(Canvas canvas, double xc, double yc, double r, double pixel)
         {
             double x = 0, y = r, z, Dd = 0;
@@ -126,5 +131,33 @@ namespace Task3
             Canvas.SetTop(rect, y);
             canvas.Children.Add(rect);
         }
+
+        void VMIcirc(Canvas canvas, double xc, double yc, double r, double pixel)
+        {
+            double x = 0, y = r, d = 3 - 2 * r;
+
+            while (x < y)
+            {
+                PixelСircle(canvas, xc, yc, x, y, pixel);
+
+                if (d < 0)
+                {
+                    d += 4 * x + 6;
+                }
+                else
+                {
+                    d += 4 * (x - y) + 10;
+                    y--;
+                }
+
+                x++;
+            }
+
+            if (x == y)
+            {
+                PixelСircle(canvas, xc, yc, x, y, pixel);
+            }
+        }
+
     }
 }
