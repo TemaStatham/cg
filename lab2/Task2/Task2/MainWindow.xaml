@@ -1,0 +1,17 @@
+﻿<Window x:Class="DrawingApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DrawingApplication" Height="450" Width="800">
+    <Grid>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Header="New" Click="NewImageClick"/>
+                <MenuItem Header="Open" Click="OpenFileClick"/>
+            </MenuItem>
+        </Menu>
+        <Image x:Name="myImage" HorizontalAlignment="Center" VerticalAlignment="Center"
+               MouseLeftButtonDown="MainImageMouseLeftButtonDown" 
+               MouseMove="MainImageMouseMove" 
+               MouseLeftButtonUp="MainImageMouseLeftButtonUp"/>
+    </Grid>
+</Window>

@@ -5,7 +5,7 @@
     <Grid>
         <Menu>
             <MenuItem Header="File">
-                <MenuItem Header="Open" Click="OpenFile_Click"/>
+                <MenuItem Header="Open" Click="OpenFileClick"/>
             </MenuItem>
         </Menu>
         <Image x:Name="ImageViewer" HorizontalAlignment="Center" VerticalAlignment="Center"/>

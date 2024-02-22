@@ -11,10 +11,10 @@ namespace ImageViewer
         public MainWindow()
         {
             InitializeComponent();
-            SizeChanged += MainWindow_SizeChanged;
+            SizeChanged += MainWindowSizeChanged;
         }
 
-        private void OpenFile_Click(object sender, RoutedEventArgs e)
+        private void OpenFileClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -56,9 +56,7 @@ namespace ImageViewer
                 MessageBox.Show($"Error loading image: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-
-        private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void MainWindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (ImageViewer.Source != null)
             {
